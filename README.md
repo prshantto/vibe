@@ -110,18 +110,5 @@ We welcome contributions to improve Vibe! Here's how you can contribute:
 
 6. Open a pull request and describe your changes.
 
-## License
-
-Vibe is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-If you have any questions or need support, feel free to reach out:
-
-- Email: support@vibeapp.com
-- Twitter: [@VibeApp](https://twitter.com/VibeApp)
-- GitHub: [Vibe Repository](https://github.com/yourusername/vibe)
-
 ---
 
-Feel free to customize this `README.md` file further to suit your needs! Let me know if there's anything else I can assist you with. 😊
