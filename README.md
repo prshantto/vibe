@@ -70,7 +70,7 @@ Follow these steps to install and run Vibe locally:
 7. Start the frontend server:
    ```sh
    cd ../frontend
-   npm start
+   npm run dev
    ```
 
 ## Usage
