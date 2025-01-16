@@ -52,7 +52,7 @@ const Login = () => {
               alt=""
             />
             <p className="welcome-message text-sm">
-              Welcome! Please fill in the details to get started.
+              Welcome Back! Login to start Vibing with friends.
             </p>
           </h2>
           <form onSubmit={handeleSubmit}>
@@ -116,7 +116,7 @@ const Login = () => {
               className="link text-blue-600 font-bold cursor-pointer"
               onClick={() => navigate("/signup")}
             >
-              Register here
+              Sign up here
             </span>
           </p>
         </div>

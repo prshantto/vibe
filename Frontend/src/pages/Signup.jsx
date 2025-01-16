@@ -56,7 +56,7 @@ const Signup = () => {
               alt=""
             />
             <p className="welcome-message text-sm">
-              Welcome! Please fill in the details to get started.
+              Welcome! Create an account to start Vibing with friends.
             </p>
           </h2>
 
@@ -93,7 +93,7 @@ const Signup = () => {
                 type="username"
                 id="username"
                 name="username"
-                placeholder="Enter your username"
+                placeholder="Enter your @username"
                 required
               />
             </div>
