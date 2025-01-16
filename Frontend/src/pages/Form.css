@@ -1,0 +1,130 @@
+/* This is the CSS for Login and Register Pages. */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container-body {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #ffffff, #e6f3ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #333;
+  width: 100%;
+}
+
+.container-body .container {
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid #ccc8c8;
+  width: 100%;
+  min-width: 400px;
+  max-width: 500px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.form-header {
+  border-bottom: 1px solid #ccc8c8;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.container h2 {
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.container h2 p {
+  color: #9b9b9b;
+  font-size: 15px;
+  font-weight: normal;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.name-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.name-inputs input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #767bf5;
+  outline: none;
+}
+
+.btn {
+  background: #005ce6;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #307df1;
+}
+
+.form-footer {
+  height: 6vh;
+  background-color: #f7f7f7;
+  text-align: center;
+  border-radius: 0 0 15px 15px;
+  padding-top: 0.6rem;
+}
+
+.link {
+  color: #2e5be1;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #396bff;
+}
+
+.error-message {
+  width: 100%;
+  padding: 12px;
+  color: #ef4444;
+  background-color: #fee2e2;
+  border: 2px solid #fd9696;
+  border-radius: 50px;
+  font-size: 16px;
+  text-align: center;
+  transition: border-color 0.3s;
+  margin-top: 1rem;
+}
