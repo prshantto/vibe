@@ -128,3 +128,19 @@
   transition: border-color 0.3s;
   margin-top: 1rem;
 }
+
+@media (max-width: 600px) {
+  .container-body {
+    height: 100vh;
+  }
+  .container-body .container {
+    margin: 20px;
+    padding: 0;
+    min-width: 300px;
+  }
+  .name-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

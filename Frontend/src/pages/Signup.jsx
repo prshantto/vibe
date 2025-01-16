@@ -48,10 +48,10 @@ const Signup = () => {
       <div className="container">
         <div className="form-header">
           <h2>
-            Register to <span className="text-[#85def8]">Vibe</span>
-            <span className="text-[#9de5b8]">Chat</span>
+            Register to <span className="text-[#85def8]">Vi</span>
+            <span className="text-[#9de5b8]">be</span>
             <img
-              className="w-8 h-8 ml-3 inline-block"
+              className="w-6 h-6 ml-2 inline-block"
               src="./chat.png"
               alt=""
             />
