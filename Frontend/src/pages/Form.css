@@ -82,7 +82,7 @@
 }
 
 .btn {
-  background: #005ce6;
+  background: linear-gradient(45deg, #60bdf2, #9ce4b9);
   color: #ffffff;
   border: none;
   border-radius: 20px;
@@ -91,11 +91,25 @@
   font-size: 16px;
   cursor: pointer;
   font-weight: bold;
+  background-size: 200%;
+  animation: gradientAnimation 3s infinite;
   transition: background 0.3s;
 }
 
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
 .btn:hover {
-  background: #307df1;
+  animation: none;
+  background: #60bdf2;
 }
 
 .form-footer {

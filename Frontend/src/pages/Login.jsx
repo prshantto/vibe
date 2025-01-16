@@ -94,7 +94,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={handleGoogleLogin}
-                className="google-btn w-full flex justify-center items-center gap-3 text-[#3c4043] text-xl font-medium 
+                className="google-btn w-full flex justify-center items-center gap-3 text-[#3c4043] text-lg lg:text-xl font-medium 
                 py-2 px-4 rounded-full border border-[#dadce0] bg-white hover:bg-gray-50 
                 hover:shadow-md transition-all duration-200 shadow-md"
               >
