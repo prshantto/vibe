@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-  onAuthStateChanged,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase/firebaseConfig";
 import { ref, set } from "firebase/database";
 import "./Form.css";
@@ -57,6 +53,7 @@ const Signup = () => {
       setIsLoading(false);
     }
   };
+
   return (
     <div className="container-body">
       {isLoading ? (
@@ -106,7 +103,10 @@ const Signup = () => {
                 <label htmlFor="username">Username</label>
                 <input
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e) => {
+                    checkUsernameExists(e.target.value);
+                    setUsername(e.target.value);
+                  }}
                   type="username"
                   id="username"
                   name="username"

@@ -1,32 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  signOut,
-  sendEmailVerification,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { ref, onValue } from "firebase/database";
-import { auth, db } from "../firebase/firebaseConfig";
+import { signOut, sendEmailVerification } from "firebase/auth";
+import { auth } from "../firebase/firebaseConfig";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    const fetchProfileData = async (user) => {
-      if (user) {
-        const profileRef = ref(db, `users/${user.uid}`);
-        onValue(profileRef, (snapshot) => {
-          const data = snapshot.val();
-          setProfile(data);
-        });
-      }
-    };
-    // Check if the user is authenticated and fetch profile data
-    onAuthStateChanged(auth, (user) => {
-      fetchProfileData(user);
-    });
-  }, [onAuthStateChanged]);
 
   const handleLogout = () => {
     signOut(auth)
@@ -51,10 +29,10 @@ const Home = () => {
     <div>
       <h1>Home</h1>
       <button onClick={handleLogout}>Logout</button>
+      <hr />
       <button onClick={handleEmailVerification}>Verify Email</button>
-      <p>{profile?.firstname + " " + profile?.lastname}</p>
-      <p>{profile?.username}</p>
-      <p>{profile?.email}</p>
+      <hr />
+      <button onClick={() => navigate("/profile")}>Profile</button>
     </div>
   );
 };
