@@ -13,7 +13,6 @@ const Profile = () => {
         const profileRef = ref(db, `users/${user.uid}`);
         onValue(profileRef, (snapshot) => {
           const data = snapshot.val();
-          console.log(data);
           if (data) {
             setProfile(data);
           }
@@ -29,12 +28,18 @@ const Profile = () => {
 
   return (
     <div>
-      <p>{profile?.firstname + " " + profile?.lastname}</p>
-      <p>{profile?.username}</p>
-      <p>{profile?.email}</p>
-      <p>{profile?.username}</p>
+      <p>
+        name:
+        {auth.currentUser.displayName ||
+          profile?.firstname + " " + profile?.lastname}
+      </p>
+      <p>username: {auth.currentUser.username || profile?.username}</p>
+      <p>email: {auth.currentUser.email || profile?.email}</p>
       <img
-        src={profile?.photoURL || "https://api.dicebear.com/9.x/pixel-art/svg"}
+        src={
+          auth.currentUser.photoURL ||
+          "https://api.dicebear.com/9.x/pixel-art/svg"
+        }
         alt="avatar"
         className="w-10 h-10 rounded-full"
       />

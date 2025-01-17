@@ -19,7 +19,6 @@ const Login = () => {
   const provider = new GoogleAuthProvider();
 
   const handleGoogleLogin = () => {
-    console.log("Google login clicked");
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result);

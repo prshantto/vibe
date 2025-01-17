@@ -22,9 +22,7 @@ const Home = () => {
       alert("Email already verified");
     }
   };
-  const handleProfile = () => {
-    console.log(profile);
-  };
+
   return (
     <div>
       <h1>Home</h1>

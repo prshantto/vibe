@@ -104,7 +104,6 @@ const Signup = () => {
                 <input
                   value={username}
                   onChange={(e) => {
-                    checkUsernameExists(e.target.value);
                     setUsername(e.target.value);
                   }}
                   type="username"
