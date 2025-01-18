@@ -24,7 +24,7 @@ const Profile = () => {
     onAuthStateChanged(auth, (user) => {
       fetchProfileData(user);
     });
-  }, [db, auth]);
+  }, []);
 
   return (
     <div>
