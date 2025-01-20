@@ -4,22 +4,13 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import Preloader from "./components/Preloader";
 import ProtectRoute from "./components/ProtectRoute";
 
 const App = () => {
   return (
     <>
-      <Preloader />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <ProtectRoute>
-              <Home />
-            </ProtectRoute>
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/profile"

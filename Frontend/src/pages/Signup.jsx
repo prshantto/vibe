@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase/firebaseConfig";
 import { ref, set } from "firebase/database";
 import "./Form.css";
-import Spinner from "../components/Spinner";
+import Loader from "../components/Loader";
 
 const Signup = () => {
   const [firstname, setFirstname] = useState("");
@@ -54,7 +54,7 @@ const Signup = () => {
   return (
     <div className="container-body">
       {isLoading ? (
-        <Spinner />
+        <Loader />
       ) : (
         <div className="container">
           <div className="form-header">
