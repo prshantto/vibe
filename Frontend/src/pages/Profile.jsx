@@ -33,7 +33,6 @@ const Profile = () => {
         {auth.currentUser.displayName ||
           profile?.firstname + " " + profile?.lastname}
       </p>
-      <p>username: {auth.currentUser.username || profile?.username}</p>
       <p>email: {auth.currentUser.email || profile?.email}</p>
       <img
         src={

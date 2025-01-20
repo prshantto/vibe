@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase/firebaseConfig";
@@ -9,7 +9,6 @@ import Spinner from "../components/Spinner";
 const Signup = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -35,13 +34,11 @@ const Signup = () => {
       await set(ref(db, `users/${userCredential.user.uid}`), {
         firstname: firstname,
         lastname: lastname,
-        username: username,
         email: email,
       });
 
       setFirstname("");
       setLastname("");
-      setUsername("");
       setEmail("");
       setPassword("");
 
@@ -97,21 +94,6 @@ const Signup = () => {
                     required
                   />
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <input
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                  }}
-                  type="username"
-                  id="username"
-                  name="username"
-                  placeholder="Enter your @username"
-                  required
-                />
               </div>
 
               <div className="form-group">
