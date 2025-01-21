@@ -9,6 +9,7 @@
   },
   "keywords": [],
   "author": "",
+  "type": "module",
   "license": "ISC",
   "description": "Vibe is a robust and user-friendly full-stack web chat application built using the MERN stack (MongoDB, Express.js, React Vite, Node.js). It offers real-time messaging and seamless user experiences with an intuitive interface. Whether for casual conversations or professional collaborations, Vibe makes staying connected effortless and enjoyable.",
   "dependencies": {
