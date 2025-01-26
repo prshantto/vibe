@@ -9,6 +9,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use("/api/message", require("./routes/message.routes.js"));
+
 app.get("/", (req, res) => {
   res.send("Hello World! This is the backend of the Vibe application.");
 });
