@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
+import Spinner from "../components/Spinner";
+import Preloader from "../components/Preloader";
 import "./Form.css";
-import Loader from "../components/Loader";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -43,11 +44,11 @@ const Login = () => {
   };
   return (
     <>
-      <Loader />
+      <Preloader />
 
       <div className="container-body">
         {isLoading ? (
-          <Loader />
+          <Spinner />
         ) : (
           <div className="container">
             <div className="form-header">

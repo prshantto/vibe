@@ -37,7 +37,7 @@ const Profile = () => {
       <img
         src={
           auth.currentUser.photoURL ||
-          "https://api.dicebear.com/9.x/pixel-art/svg"
+          "https://api.dicebear.com/9.x/thumbs/svg?eyesColor=000000&mouth=variant5&shapeColor=1c799f&backgroundColor=0a5b83"
         }
         alt="avatar"
         className="w-10 h-10 rounded-full"

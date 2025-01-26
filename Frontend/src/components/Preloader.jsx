@@ -7,7 +7,7 @@ const Preloader = () => {
     // Simulate a network request or other async tasks
     const timer = setTimeout(() => {
       setIsLoaded(true);
-    }, 2000); // Adjust the timeout as needed
+    }, 1200);
 
     return () => clearTimeout(timer);
   }, []);

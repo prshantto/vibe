@@ -1,18 +1,13 @@
-const Spinner = () => {
+import { motion } from "framer-motion";
+
+export const Spinner = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
-      {" "}
-      <div className="relative flex justify-center items-center">
-        {" "}
-        <div
-          className="absolute rounded-full w-16 h-16 border-t-2 border-b-2 animate-spin"
-          style={{
-            borderColor: "transparent",
-            borderTopColor: "#3490dc",
-            borderBottomColor: "#3490dc",
-          }}
-        ></div>{" "}
-      </div>
+    <div className="flex justify-center items-center h-screen">
+      <motion.div
+        className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+        animate={{ rotate: 360 }}
+        transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+      ></motion.div>
     </div>
   );
 };

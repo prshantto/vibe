@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase/firebaseConfig";
 import { ref, set } from "firebase/database";
+import Spinner from "../components/Spinner";
 import "./Form.css";
-import Loader from "../components/Loader";
 
 const Signup = () => {
   const [firstname, setFirstname] = useState("");
@@ -54,7 +54,7 @@ const Signup = () => {
   return (
     <div className="container-body">
       {isLoading ? (
-        <Loader />
+        <Spinner />
       ) : (
         <div className="container">
           <div className="form-header">

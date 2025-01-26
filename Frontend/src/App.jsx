@@ -8,21 +8,19 @@ import ProtectRoute from "./components/ProtectRoute";
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/profile"
-          element={
-            <ProtectRoute>
-              <Profile />
-            </ProtectRoute>
-          }
-        />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/profile"
+        element={
+          <ProtectRoute>
+            <Profile />
+          </ProtectRoute>
+        }
+      />
+      <Route path="/signup" element={<Signup />} />
+    </Routes>
   );
 };
 
