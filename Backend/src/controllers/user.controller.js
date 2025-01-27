@@ -18,6 +18,6 @@ export const registerUser = async (req, res) => {
     );
     res.status(201).json(users);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(501).json({ message: error.message });
   }
 };
