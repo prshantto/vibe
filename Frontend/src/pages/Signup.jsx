@@ -5,6 +5,7 @@ import { auth, db } from "../firebase/firebaseConfig";
 import { ref, set } from "firebase/database";
 import Spinner from "../components/Spinner";
 import "./Form.css";
+import axios from "axios";
 
 const Signup = () => {
   const [firstname, setFirstname] = useState("");
@@ -35,6 +36,13 @@ const Signup = () => {
         firstname: firstname,
         lastname: lastname,
         email: email,
+      });
+
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/registerUser`, {
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
       });
 
       setFirstname("");
