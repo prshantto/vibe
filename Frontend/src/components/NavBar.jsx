@@ -1,4 +1,4 @@
-import { Settings, User, LogOut } from "lucide-react";
+import { Settings, User, LogOut, MessageSquareMore } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
@@ -17,7 +17,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center px-4 py-2 bg-primary">
+    <div className="flex justify-between items-center px-4 py-2 bg-neutral/50">
       <div
         onClick={() => navigate("/")}
         className="logo text-3xl md:text-4xl font-bold flex items-center gap-2 cursor-pointer"
@@ -34,13 +34,17 @@ const NavBar = () => {
       </div>
 
       <div className="flex item-center justify-center gap-2 md:gap-5 mt-3 md:mt-0 font-semibold">
-        <button onClick={() => navigate("/settings")} className="flex gap-1">
-          <Settings />
-          <span className="hidden md:inline">Settings</span>
+        <button onClick={() => navigate("/")} className="flex gap-1">
+          <MessageSquareMore />
+          <span className="hidden md:inline">Chat</span>
         </button>
         <button onClick={() => navigate("/profile")} className="flex gap-1">
           <User />
           <span className="hidden md:inline">Profile</span>
+        </button>
+        <button onClick={() => navigate("/settings")} className="flex gap-1">
+          <Settings />
+          <span className="hidden md:inline">Settings</span>
         </button>
         <button onClick={handleLogout} className="flex gap-1">
           <LogOut />

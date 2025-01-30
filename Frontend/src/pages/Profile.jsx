@@ -31,6 +31,7 @@ const Profile = () => {
     // Check if the user is authenticated and fetch profile data
     onAuthStateChanged(auth, (user) => {
       fetchProfileData(user);
+      setIsOn(true);
     });
   }, []);
 
@@ -39,7 +40,7 @@ const Profile = () => {
       <NavBar />
 
       <div className="w-screen h-[90vh] flex justify-center items-center flex-col md:flex-row gap-5 px-4 md:px-0">
-        <div className="w-full md:w-[40%] h-auto md:h-[60%] bg-gray-300 rounded-xl flex items-center flex-col p-4 md:p-0">
+        <div className="w-full md:w-[40%] h-auto md:h-[60%] bg-secondary/50 rounded-xl flex items-center flex-col p-4 md:p-0">
           <h1 className="text-2xl font-bold my-5">Profile</h1>
           <img
             src={
@@ -62,7 +63,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-[40%] h-auto md:h-[60%] bg-gray-300 rounded-xl flex items-center flex-col p-4 md:p-0">
+        <div className="w-full md:w-[40%] h-auto md:h-[60%] bg-secondary/50 rounded-xl flex items-center flex-col p-4 md:p-0">
           <h1 className="text-2xl font-bold my-5">Account Information</h1>
           <div className="w-full text-lg md:text-xl px-2 md:px-3 mt-3">
             <h2 className="font-bold mb-1">Last Signin</h2>
