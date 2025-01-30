@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Routes, Route } from "react-router-dom";
 
 import Signup from "./pages/Signup";
@@ -11,18 +12,38 @@ import ProtectRoute from "./components/ProtectRoute";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/"
+        element={
+          <Home />
+
+          // <ProtectRoute>
+          //   <Home />
+          // </ProtectRoute>
+        }
+      />
       <Route
         path="/profile"
         element={
-          <ProtectRoute>
-            <Profile />
-          </ProtectRoute>
+          <Profile />
+
+          // <ProtectRoute>
+          //   <Profile />
+          // </ProtectRoute>
         }
       />
-      <Route path="settings" element={<Settings />} />
+      <Route
+        path="settings"
+        element={
+          <Settings />
+
+          // <ProtectRoute>
+          //   <Settings />
+          // </ProtectRoute>
+        }
+      />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

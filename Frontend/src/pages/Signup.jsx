@@ -67,13 +67,17 @@ const Signup = () => {
         <div className="container">
           <div className="form-header">
             <h2>
-              Register to <span className="text-[#85def8]">Vi</span>
-              <span className="text-[#9de5b8]">be</span>
-              <img
-                className="w-6 h-6 ml-2 inline-block"
-                src="./chat.png"
-                alt=""
-              />
+              <div className="text-4xl font-bold flex items-center justify-center">
+                <img
+                  className="w-8 h-8 ml-2 inline-block"
+                  src="./chat.png"
+                  alt="logo"
+                />
+                <h1 className=" inline-block font-mono">
+                  <span className="text-[#85def8]">Vi</span>
+                  <span className="text-[#9de5b8]">be</span>
+                </h1>
+              </div>
               <p className="welcome-message text-sm">
                 Welcome! Create an account to start Vibing with friends.
               </p>
