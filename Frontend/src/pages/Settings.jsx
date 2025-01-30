@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import NavBar from "../components/NavBar";
@@ -17,12 +18,15 @@ const PREVIEW_MESSAGES = [
 
 const Settings = () => {
   const [theme, setTheme] = useRecoilState(themeAtom);
+  const [isLoading, setIsLoading] = useState(false);
   const handleEmailVerification = async () => {
     if (!auth.currentUser.emailVerified) {
+      setIsLoading(true);
       await sendEmailVerification(auth.currentUser);
     } else {
       alert("Email already verified");
     }
+    setIsLoading(false);
   };
   return (
     <>
@@ -30,16 +34,22 @@ const Settings = () => {
 
       <div className=" min-h-screen flex flex-col items-center gap-5">
         {!auth.currentUser.emailVerified ? (
-          <div className=" w-[90%] p-3 mt-5 text-lg rounded-lg ">
-            <h1 className="font-bold text-2xl">Your Email is not verified</h1>
-            <button
-              disabled={!auth.currentUser.emailVerified}
-              onClick={handleEmailVerification}
-              className="px-4 py-2 bg-neutral/40 rounded-lg my-2"
-            >
-              Click to Verify your Email
-            </button>
-          </div>
+          isLoading ? (
+            // <div className="w-[90%] p-3">Loading...</div>
+            <div className="w-[90%] p-3 mt-5 font-bold text-2xl">
+              Verification Email Sent!{" "}
+            </div>
+          ) : (
+            <div className="w-[90%] p-3 mt-5 text-lg rounded-lg">
+              <h1 className="font-bold text-2xl">Your Email is not verified</h1>
+              <button
+                onClick={handleEmailVerification}
+                className="px-4 py-2 bg-primary rounded-lg my-2"
+              >
+                Click to Verify your Email
+              </button>
+            </div>
+          )
         ) : null}
 
         <div className="themes w-[90%] p-3 rounded-lg">
