@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export const themeAtom = atom({
   key: "themeAtom",
-  default: "cyberpunk",
+  default: localStorage.getItem("theme") || "Night",
 });
 
 export const userAtom = atom({

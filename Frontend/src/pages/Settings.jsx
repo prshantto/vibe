@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sendEmailVerification } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import NavBar from "../components/NavBar";
@@ -19,8 +19,16 @@ const PREVIEW_MESSAGES = [
 const Settings = () => {
   const [theme, setTheme] = useRecoilState(themeAtom);
   const [isLoading, setIsLoading] = useState(false);
+
+  const storedUserDataString = localStorage.getItem("user");
+  const storedUserData = storedUserDataString
+    ? JSON.parse(storedUserDataString)
+    : null;
+
+  const isEmailVerified =
+    auth.currentUser?.emailVerified || storedUserData.emailVerified;
   const handleEmailVerification = async () => {
-    if (!auth.currentUser.emailVerified) {
+    if (!isEmailVerified) {
       setIsLoading(true);
       await sendEmailVerification(auth.currentUser);
     } else {
@@ -28,12 +36,17 @@ const Settings = () => {
     }
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   return (
     <>
       <NavBar />
 
       <div className=" min-h-screen flex flex-col items-center gap-5">
-        {!auth.currentUser.emailVerified ? (
+        {!isEmailVerified ? (
           isLoading ? (
             // <div className="w-[90%] p-3">Loading...</div>
             <div className="w-[90%] p-3 mt-5 font-bold text-2xl">

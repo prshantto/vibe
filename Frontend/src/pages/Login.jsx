@@ -46,6 +46,7 @@ const Login = () => {
           uid: result.user.uid,
           creationTime: result.user.metadata.creationTime,
           lastSignInTime: result.user.metadata.lastSignInTime,
+          emailVerified: result.user.emailVerified,
         });
 
         navigate("/");
@@ -72,6 +73,7 @@ const Login = () => {
           uid: userCredential.user.uid,
           creationTime: userCredential.user.metadata.creationTime,
           lastSignInTime: userCredential.user.metadata.lastSignInTime,
+          emailVerified: userCredential.user.emailVerified,
         });
 
         navigate("/");
