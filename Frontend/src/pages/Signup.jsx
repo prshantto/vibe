@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase/firebaseConfig";
 import { ref, set } from "firebase/database";
 import Spinner from "../components/Spinner";
 import "./Form.css";
-import axios from "axios";
+// import axios from "axios";
+import { useRecoilState } from "recoil";
+import { userAtom } from "../recoil/atom";
 
 const Signup = () => {
   const [firstname, setFirstname] = useState("");
@@ -15,6 +17,7 @@ const Signup = () => {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [user, setUser] = useRecoilState(userAtom);
 
   const handeleSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ const Signup = () => {
         email,
         password
       );
-      console.log(userCredential.user);
+      // console.log(userCredential.user);
 
       await updateProfile(userCredential.user, {
         displayName: `${firstname} ${lastname}`,
@@ -38,12 +41,29 @@ const Signup = () => {
         email: email,
       });
 
-      axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/registerUser`, {
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        password: password,
+      setUser({
+        firstname: userCredential.user.displayName.split(" ")[0],
+        lastname: userCredential.user.displayName.split(" ")[1],
+        email: userCredential.user.email,
+        photoURL:
+          userCredential.user.photoURL ||
+          "https://api.dicebear.com/9.x/thumbs/svg?eyesColor=000000&mouth=variant5&shapeColor=1c799f&backgroundColor=0a5b83",
+        uid: userCredential.user.uid,
+        creationTime: userCredential.user.metadata.creationTime,
+        lastSignInTime: userCredential.user.metadata.lastSignInTime,
+        emailVerified: userCredential.user.emailVerified,
       });
+
+      // axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/registerUser`, {
+      //   firstname: firstname,
+      //   lastname: lastname,
+      //   email: email,
+      //   password: password,
+      //   uid: userCredential.user.uid,
+      //   creationTime: userCredential.user.metadata.creationTime,
+      //   lastSignInTime: userCredential.user.metadata.lastSignInTime,
+      //   emailVerified: userCredential.user.emailVerified,
+      // });
 
       setFirstname("");
       setLastname("");
@@ -58,6 +78,10 @@ const Signup = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   return (
     <div className="container-body">
@@ -95,6 +119,7 @@ const Signup = () => {
                     name="firstname"
                     placeholder="First Name"
                     required
+                    autoComplete="firstname"
                   />
                   <input
                     value={lastname}
@@ -104,6 +129,7 @@ const Signup = () => {
                     name="lastname"
                     placeholder="Last Name"
                     required
+                    autoComplete="lastname"
                   />
                 </div>
               </div>
@@ -118,6 +144,7 @@ const Signup = () => {
                   name="email"
                   placeholder="Enter your email"
                   required
+                  autoComplete="email"
                 />
               </div>
 
@@ -131,6 +158,7 @@ const Signup = () => {
                   name="password"
                   placeholder="Create a password"
                   required
+                  autoComplete="password"
                 />
               </div>
 

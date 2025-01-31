@@ -22,7 +22,7 @@ const Login = () => {
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
 
         // axios.post(
         //   `${import.meta.env.VITE_BACKEND_URL}/api/user/registerUser`,
@@ -61,7 +61,7 @@ const Login = () => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential.user);
+        // console.log(userCredential.user);
 
         setUser({
           firstname: userCredential.user.displayName.split(" ")[0],
