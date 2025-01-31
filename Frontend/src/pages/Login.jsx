@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -6,6 +6,9 @@ import { auth } from "../firebase/firebaseConfig";
 import Spinner from "../components/Spinner";
 import Preloader from "../components/Preloader";
 import "./Form.css";
+// import axios from "axios";
+import { useRecoilState } from "recoil";
+import { userAtom } from "../recoil/atom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,11 +17,37 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const provider = new GoogleAuthProvider();
+  const [user, setUser] = useRecoilState(userAtom);
 
   const handleGoogleLogin = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result);
+
+        // axios.post(
+        //   `${import.meta.env.VITE_BACKEND_URL}/api/user/registerUser`,
+        //   {
+        //     firstname: result.user.displayName.split(" ")[0],
+        //     lastname: result.user.displayName.split(" ")[1],
+        //     email: result.user.email,
+        //     uid: result.user.uid,
+        //     creationTime: result.user.metadata.creationTime,
+        //     lastSignInTime: result.user.metadata.lastSignInTime,
+        //   }
+        // );
+
+        setUser({
+          firstname: result.user.displayName.split(" ")[0],
+          lastname: result.user.displayName.split(" ")[1],
+          email: result.user.email,
+          photoURL:
+            result.user.photoURL ||
+            "https://api.dicebear.com/9.x/thumbs/svg?eyesColor=000000&mouth=variant5&shapeColor=1c799f&backgroundColor=0a5b83",
+          uid: result.user.uid,
+          creationTime: result.user.metadata.creationTime,
+          lastSignInTime: result.user.metadata.lastSignInTime,
+        });
+
         navigate("/");
       })
       .catch((error) => {
@@ -32,6 +61,19 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential.user);
+
+        setUser({
+          firstname: userCredential.user.displayName.split(" ")[0],
+          lastname: userCredential.user.displayName.split(" ")[1],
+          email: userCredential.user.email,
+          photoURL:
+            userCredential.user.photoURL ||
+            "https://api.dicebear.com/9.x/thumbs/svg?eyesColor=000000&mouth=variant5&shapeColor=1c799f&backgroundColor=0a5b83",
+          uid: userCredential.user.uid,
+          creationTime: userCredential.user.metadata.creationTime,
+          lastSignInTime: userCredential.user.metadata.lastSignInTime,
+        });
+
         navigate("/");
       })
       .catch((error) => {
@@ -42,6 +84,10 @@ const Login = () => {
     setEmail("");
     setPassword("");
   };
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
   return (
     <>
       <Preloader />
@@ -79,6 +125,7 @@ const Login = () => {
                     name="email"
                     placeholder="Enter your email"
                     required
+                    autoComplete="email"
                   />
                 </div>
 
@@ -92,6 +139,7 @@ const Login = () => {
                     name="password"
                     placeholder="Enter your password"
                     required
+                    autoComplete="current-password"
                   />
                 </div>
 

@@ -10,6 +10,7 @@ const NavBar = () => {
     signOut(auth)
       .then(() => {
         navigate("/login");
+        localStorage.clear();
       })
       .catch((error) => {
         console.log(error);
