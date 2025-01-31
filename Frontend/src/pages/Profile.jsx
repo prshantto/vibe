@@ -45,7 +45,7 @@ const Profile = () => {
       <NavBar />
 
       <div className="w-screen h-[90vh] flex justify-center items-center flex-col md:flex-row gap-5 px-4 md:px-0">
-        <div className="w-full md:w-[40%] h-auto md:h-[60%] bg-secondary/50 rounded-xl flex items-center flex-col p-4 md:p-0">
+        <div className="w-full md:w-[40%] h-auto md:h-[60%] bg-secondary/40 rounded-xl flex items-center flex-col p-4 md:p-0 shadow-2xl">
           <h1 className="text-2xl font-bold my-5">Profile</h1>
           <img
             src={storedUserData?.photoURL}
@@ -54,29 +54,29 @@ const Profile = () => {
           />
           <div className="info w-full px-2 md:px-5 text-lg md:text-xl">
             <h1 className="font-bold mb-1">Full Name</h1>
-            <p className="border-2 border-black rounded-lg py-1.5 px-2 mb-2 ">
+            <p className="border-2 border-neutral/40 rounded-lg py-1.5 px-2 mb-2 ">
               {storedUserData?.firstname + " " + storedUserData?.lastname}
             </p>
             <h1 className="font-bold mb-1">Email Address</h1>
-            <p className="border-2 border-black rounded-lg py-1.5 px-2 mb-2">
+            <p className="border-2 border-neutral/40 rounded-lg py-1.5 px-2 mb-2">
               {storedUserData?.email}
             </p>
           </div>
         </div>
 
-        <div className="w-full md:w-[40%] h-auto md:h-[60%] bg-secondary/50 rounded-xl flex items-center flex-col p-4 md:p-0">
+        <div className="w-full md:w-[40%] h-auto md:h-[60%] bg-secondary/40 rounded-xl flex items-center flex-col p-4 md:p-0 shadow-2xl">
           <h1 className="text-2xl font-bold mt-5">Account Information</h1>
           <div className="w-full text-lg md:text-xl px-2 md:px-3 mt-3">
             <h2 className="font-bold mb-1">Last Signin</h2>
-            <p className="border-2 border-black rounded-lg py-1.5 px-2 mb-2">
+            <p className="border-2 border-neutral/40 rounded-lg py-1.5 px-2 mb-2">
               {lastSignInTime}
             </p>
             <h2 className="font-bold mb-1">Member Since</h2>
-            <p className="border-2 border-black rounded-lg py-1.5 px-2 mb-2">
+            <p className="border-2 border-neutral/40 rounded-lg py-1.5 px-2 mb-2">
               {creationTime[1] + " " + creationTime[2] + " " + creationTime[3]}
             </p>
             <h2 className="font-bold mb-1">Unique Chat ID (UID)</h2>
-            <p className="border-2 border-black rounded-lg py-1.5 px-2 mb-2 flex justify-between">
+            <p className="border-2 border-neutral/40 rounded-lg py-1.5 px-2 mb-2 flex justify-between">
               <span onClick={copyToClipboard} className="cursor-pointer">
                 {isLoading ? (
                   <span>Copied!</span>
@@ -99,7 +99,7 @@ const Profile = () => {
               <Copy onClick={copyToClipboard} className="cursor-pointer" />
             </p>
             <h2 className="font-bold mb-1">Account Status</h2>
-            <p className="border-2 border-black rounded-lg py-1.5 px-2 mb-2 flex justify-between">
+            <p className="border-2 border-neutral/40 rounded-lg py-1.5 px-2 mb-2 flex justify-between">
               {isOn ? <span>Online</span> : <span>Offline</span>}
               <label className="relative inline-block w-16 h-8">
                 <input

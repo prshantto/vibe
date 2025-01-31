@@ -48,9 +48,8 @@ const Settings = () => {
       <div className=" min-h-screen flex flex-col items-center gap-5">
         {!isEmailVerified ? (
           isLoading ? (
-            // <div className="w-[90%] p-3">Loading...</div>
             <div className="w-[90%] p-3 mt-5 font-bold text-2xl">
-              Verification Email Sent!{" "}
+              Verification Email Sent!
             </div>
           ) : (
             <div className="w-[90%] p-3 mt-5 text-lg rounded-lg">
@@ -99,9 +98,10 @@ const Settings = () => {
         </div>
 
         {/* Preview Section */}
-        <div className="preview w-[90%] rounded-lg bg-secondary my-5">
-          <h3 className="text-lg font-semibold mb-3">Preview</h3>
-          <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
+        <h1 className="font-bold text-2xl w-[90%] p-3">PREVIEW</h1>
+
+        <div className="preview w-[90%] rounded-lg mb-5 flex gap-5">
+          <div className="rounded-xl w-[50%]  border border-base-300 overflow-hidden bg-base shadow-2xl">
             <div className="p-4 bg-base-200">
               <div className="max-w-lg mx-auto">
                 {/* Mock Chat UI */}
@@ -175,6 +175,8 @@ const Settings = () => {
               </div>
             </div>
           </div>
+
+          <div className="rounded-xl w-[50%]  border border-base-300 overflow-hidden bg-base shadow-2xl"></div>
         </div>
       </div>
     </>
