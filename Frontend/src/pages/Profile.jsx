@@ -81,7 +81,19 @@ const Profile = () => {
                 {isLoading ? (
                   <span>Copied!</span>
                 ) : (
-                  <span>{storedUserData?.uid}</span>
+                  <>
+                    {" "}
+                    <span className="hidden lg:block">
+                      {storedUserData?.uid}
+                    </span>
+                    <span className="block lg:hidden">
+                      {" "}
+                      {`${storedUserData?.uid.slice(
+                        0,
+                        5
+                      )}..........${storedUserData?.uid.slice(-5)}`}
+                    </span>
+                  </>
                 )}
               </span>
               <Copy onClick={copyToClipboard} className="cursor-pointer" />
