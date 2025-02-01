@@ -164,7 +164,7 @@ const Login = () => {
                       alt="Google Logo"
                       className="h-8 w-8"
                     />
-                    Continue with Google
+                    Sign in with Google
                   </button>
                 </div>
 
