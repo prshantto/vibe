@@ -6,7 +6,7 @@ import { auth } from "../firebase/firebaseConfig";
 import Spinner from "../components/Spinner";
 import Preloader from "../components/Preloader";
 import "./Form.css";
-// import axios from "axios";
+import axios from "axios";
 import { useRecoilState } from "recoil";
 import { userAtom } from "../recoil/atom";
 
@@ -19,41 +19,38 @@ const Login = () => {
   const provider = new GoogleAuthProvider();
   const [user, setUser] = useRecoilState(userAtom);
 
-  const handleGoogleLogin = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // console.log(result);
+  const handleGoogleLogin = async () => {
+    try {
+      setIsLoading(true);
+      const result = await signInWithPopup(auth, provider);
+      // console.log(result.user);
 
-        // axios.post(
-        //   `${import.meta.env.VITE_BACKEND_URL}/api/user/registerUser`,
-        //   {
-        //     firstname: result.user.displayName.split(" ")[0],
-        //     lastname: result.user.displayName.split(" ")[1],
-        //     email: result.user.email,
-        //     uid: result.user.uid,
-        //     creationTime: result.user.metadata.creationTime,
-        //     lastSignInTime: result.user.metadata.lastSignInTime,
-        //   }
-        // );
-
-        setUser({
-          firstname: result.user.displayName.split(" ")[0],
-          lastname: result.user.displayName.split(" ")[1],
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/loginUser`,
+        {
           email: result.user.email,
-          photoURL:
-            result.user.photoURL ||
-            "https://api.dicebear.com/9.x/thumbs/svg?eyesColor=000000&mouth=variant5&shapeColor=1c799f&backgroundColor=0a5b83",
-          uid: result.user.uid,
-          creationTime: result.user.metadata.creationTime,
-          lastSignInTime: result.user.metadata.lastSignInTime,
-          emailVerified: result.user.emailVerified,
-        });
+        }
+      );
 
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
+      setUser({
+        firstname: result.user.displayName.split(" ")[0],
+        lastname: result.user.displayName.split(" ")[1],
+        email: result.user.email,
+        photoURL:
+          result.user.photoURL ||
+          "https://api.dicebear.com/9.x/thumbs/svg?eyesColor=000000&mouth=variant5&shapeColor=1c799f&backgroundColor=0a5b83",
+        uid: result.user.uid,
+        creationTime: result.user.metadata.creationTime,
+        lastSignInTime: result.user.metadata.lastSignInTime,
+        emailVerified: result.user.emailVerified,
       });
+      setIsLoading(false);
+      navigate("/");
+    } catch (error) {
+      setIsLoading(false);
+      console.error({ error: error });
+      setErrors(error.response.data || "Error occurred while signing in");
+    }
   };
 
   const handeleSubmit = (e) => {
@@ -79,8 +76,9 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log(error);
-        setErrors({ error: error.message });
+        setErrors("Invalid Email or Password");
       });
 
     setEmail("");
@@ -166,12 +164,12 @@ const Login = () => {
                       alt="Google Logo"
                       className="h-8 w-8"
                     />
-                    Sign in with Google
+                    Continue with Google
                   </button>
                 </div>
 
                 {Object.keys(errors).length > 0 ? (
-                  <div className="error-message">{errors.error}</div>
+                  <div className="error-message">{errors.error || errors}</div>
                 ) : null}
               </form>
             </div>

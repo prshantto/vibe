@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { auth, db } from "../firebase/firebaseConfig";
 import { ref, set } from "firebase/database";
 import Spinner from "../components/Spinner";
 import "./Form.css";
-// import axios from "axios";
+import axios from "axios";
 import { useRecoilState } from "recoil";
 import { userAtom } from "../recoil/atom";
 
 const Signup = () => {
+  const provider = new GoogleAuthProvider();
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -18,6 +24,50 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userAtom);
+
+  const handleGoogleLogin = async () => {
+    try {
+      setIsLoading(true);
+      const result = await signInWithPopup(auth, provider);
+      // console.log(result.user);
+
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/registerUser`,
+        {
+          provider: result.user.providerData[0].providerId,
+          firstname: result.user.displayName.split(" ")[0],
+          lastname: result.user.displayName.split(" ")[1],
+          photoURL:
+            result.user.photoURL ||
+            "https://api.dicebear.com/9.x/thumbs/svg?eyesColor=000000&mouth=variant5&shapeColor=1c799f&backgroundColor=0a5b83",
+          email: result.user.email,
+          uid: result.user.uid,
+          creationTime: result.user.metadata.creationTime,
+          lastSignInTime: result.user.metadata.lastSignInTime,
+          emailVerified: result.user.emailVerified,
+        }
+      );
+
+      setUser({
+        firstname: result.user.displayName.split(" ")[0],
+        lastname: result.user.displayName.split(" ")[1],
+        email: result.user.email,
+        photoURL:
+          result.user.photoURL ||
+          "https://api.dicebear.com/9.x/thumbs/svg?eyesColor=000000&mouth=variant5&shapeColor=1c799f&backgroundColor=0a5b83",
+        uid: result.user.uid,
+        creationTime: result.user.metadata.creationTime,
+        lastSignInTime: result.user.metadata.lastSignInTime,
+        emailVerified: result.user.emailVerified,
+      });
+      setIsLoading(false);
+      navigate("/");
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+      setErrors("Error occurred while signing in");
+    }
+  };
 
   const handeleSubmit = async (e) => {
     e.preventDefault();
@@ -54,16 +104,17 @@ const Signup = () => {
         emailVerified: userCredential.user.emailVerified,
       });
 
-      // axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/registerUser`, {
-      //   firstname: firstname,
-      //   lastname: lastname,
-      //   email: email,
-      //   password: password,
-      //   uid: userCredential.user.uid,
-      //   creationTime: userCredential.user.metadata.creationTime,
-      //   lastSignInTime: userCredential.user.metadata.lastSignInTime,
-      //   emailVerified: userCredential.user.emailVerified,
-      // });
+      axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/user/registerUser`, {
+        provider: userCredential.user.providerData[0].providerId,
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+        uid: userCredential.user.uid,
+        creationTime: userCredential.user.metadata.creationTime,
+        lastSignInTime: userCredential.user.metadata.lastSignInTime,
+        emailVerified: userCredential.user.emailVerified,
+      });
 
       setFirstname("");
       setLastname("");
@@ -72,6 +123,7 @@ const Signup = () => {
 
       navigate("/");
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
       setErrors({ error: error.message });
     } finally {
@@ -166,8 +218,29 @@ const Signup = () => {
                 Sign Up
               </button>
 
+              <div className="login-divider text-gray-500 text-center my-1 text-xl">
+                or
+              </div>
+
+              <div className="google-login flex justify-center">
+                <button
+                  type="button"
+                  onClick={handleGoogleLogin}
+                  className="google-btn w-full flex justify-center items-center gap-3 text-[#3c4043] text-lg lg:text-xl font-medium 
+                py-2 px-4 rounded-full border border-[#dadce0] bg-white hover:bg-gray-50 
+                hover:shadow-md transition-all duration-200 shadow-md"
+                >
+                  <img
+                    src="./google.png"
+                    alt="Google Logo"
+                    className="h-8 w-8"
+                  />
+                  Continue with Google
+                </button>
+              </div>
+
               {Object.keys(errors).length > 0 ? (
-                <div className="error-message">{errors.error}</div>
+                <div className="error-message">{errors || errors.error}</div>
               ) : null}
             </form>
           </div>

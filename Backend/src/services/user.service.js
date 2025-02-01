@@ -1,12 +1,25 @@
 import UserModel from "../models/user.model.js";
 
-const registerUser = async (firstname, lastname, email, password) => {
+const registerUser = async (
+  firstname,
+  lastname,
+  email,
+  photoURL,
+  uid,
+  creationTime,
+  lastSignInTime,
+  emailVerified
+) => {
   try {
     const user = await UserModel.create({
       firstname,
       lastname,
       email,
-      password,
+      photoURL,
+      uid,
+      creationTime,
+      lastSignInTime,
+      emailVerified,
     });
     return user;
   } catch (error) {

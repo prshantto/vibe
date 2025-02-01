@@ -9,6 +9,7 @@ const Home = () => {
   return (
     <>
       <NavBar />
+
       <div className="min-h-screen">
         <h1>Home</h1>
       </div>
