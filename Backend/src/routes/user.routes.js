@@ -8,7 +8,7 @@ import {
   check,
 } from "../controllers/user.controller.js";
 
-router.get("/getuser", getusers);
+router.get("/getusers", getusers);
 router.post("/loginUser", loginUser);
 router.post("/registerUser", registerUser);
 router.get("/check", check);
