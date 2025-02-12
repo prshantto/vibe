@@ -1,6 +1,15 @@
 import userService from "../services/user.service.js";
 import UserModel from "../models/user.model.js";
 
+export const getusers = async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(501).json({ message: error.message });
+  }
+};
+
 export const registerUser = async (req, res) => {
   try {
     let {
