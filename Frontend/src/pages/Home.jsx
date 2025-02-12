@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import Sidebar from "../components/Sidebar";
+import NoChatSelected from "../components/NoChatSelected";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -10,8 +12,9 @@ const Home = () => {
     <>
       <NavBar />
 
-      <div className="min-h-screen">
-        <h1>Home</h1>
+      <div className="min-h-screen flex">
+        <Sidebar />
+        <NoChatSelected />
       </div>
     </>
   );
