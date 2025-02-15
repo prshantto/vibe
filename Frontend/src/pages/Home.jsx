@@ -1,12 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import Sidebar from "../components/Sidebar";
 import NoChatSelected from "../components/NoChatSelected";
+import ChatContainer from "../components/ChatContainer";
+import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
+import { selectedUserAtom } from "../recoil/atom";
 
 const Home = () => {
-  const navigate = useNavigate();
+  const selectedUser = useRecoilValue(selectedUserAtom);
 
   return (
     <>
@@ -14,7 +17,8 @@ const Home = () => {
 
       <div className="min-h-screen flex">
         <Sidebar />
-        <NoChatSelected />
+
+        {!selectedUser ? <NoChatSelected /> : <ChatContainer />}
       </div>
     </>
   );
